@@ -1,0 +1,84 @@
+[
+    {
+        "name": "Move 1",
+        "description": "Move 1 tile in any direction.",
+        "type": "ability"
+    },
+    {
+        "name": "Ghost Noises",
+        "description": "Scare: 2, Distance: 6",
+        "type": "ability"
+    },
+    {
+        "name": "Winged Boots",
+        "description": "1+ movement",
+        "type": "equipment"
+    },
+    {
+        "name": "Firecracker",
+        "description": "Scare: 1, Distance: 6",
+        "type": "equipment"
+    },
+    {
+        "name": "Etheral Gloves",
+        "description": "All close scares +1. Scare: 4, Distance: 1",
+        "type": "equipment"
+    },
+    {
+        "name": "Nightmare",
+        "description": "1 scare per turn for 2 turns. Distance: 6",
+        "type": "ability",
+        "combo": "Witchdoctor"
+    },
+    {
+        "name": "Frighten",
+        "description": "Target may not move next turn. Distance: 3.",
+        "type": "ability",
+        "combo": "Witchdoctor",
+        "effect": "Target loses 2 moves in 2 turns"
+    },
+    {
+        "name": "Poison Dart",
+        "description": "1 Scare, -1 movement next turn. Distance: 6",
+        "type": "ability",
+        "combo": "Witchdoctor"
+    },
+    {
+        "name": "Hidden Door",
+        "description": "All targets may not Scare you next turn.",
+        "type": "ability",
+        "combo": "Pathfinder"
+    },
+    {
+        "name": "Boo!",
+        "description": "Scare: 4, Distance: 1. Must be behind target.",
+        "type": "ability",
+        "combo": "Pathfinder"
+    },
+    {
+        "name": "Sprint",
+        "description": "3+ movement. Player is unable to attack this turn.",
+        "type": "ability",
+        "combo": "Pathfinder",
+        "effect": "Running within 1 tile of target causes 1 scare"
+    },
+    {
+        "name": "Mirror Image",
+        "description": "Duplicate your character for 2 turns. Duplicate can be scared. At the \nend of the 2nd turn, player can move to either location.",
+        "type": "Chanelled",
+        "combo": "Magician"
+    },
+    {
+        "name": "Ward",
+        "description": "Leave at your location. Ward can not be scared. Ward is returned to deck\nafter 3 turns. Scare: 1, Distance: 4",
+        "type": "Chanelled",
+        "combo": "Magician",
+        "effect": "May scare through walls."
+    },
+    {
+        "name": "Deadbolt",
+        "description": "Prevent target from opening a chest next turn. Distance: 10, through walls.",
+        "type": "ability",
+        "combo": "Magician"
+    }
+]
