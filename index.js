@@ -15,7 +15,22 @@ app.get('/draw', function (req, res) {
 })
 
 app.get('/turn', function (req, res) {
-  res.render('header', {playerId: treasureinc.getCurrentPlayer()})
+  res.render('header', {playerId: treasureinc.currentPlayer})
+})
+
+app.post('/turn', function (req, res) {
+  treasureinc.updateCurrentPlayer()
+  res.sendStatus(200)
+})
+
+app.get('/drawTreasure', function (req, res) {
+  var treasure = treasureinc.drawTreasure()
+  res.render('treasurecard', {cards: treasure})
+})
+
+app.post('/takeTreasure/:cardname', function (req, res) {
+  treasureinc.takeTreasure(req.params['cardname'])
+  res.sendStatus(200)
 })
 
 app.get('/card/:cardname', function (req, res) {

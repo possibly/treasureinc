@@ -22,9 +22,30 @@
     })
   }
 
+  function nextTurn(){
+    request('post', 'turn', function(){
+      updateTurn()
+      document.getElementById('hand').innerHTML = ''
+    })
+  }
+
+  function drawTreasure(){
+    request('get', 'drawTreasure', function(){
+      document.getElementById('treasure').innerHTML = this.response
+    })
+  }
+
+  function takeTreasure(cardName){
+    request('post', 'takeTreasure/'+cardName, function(){
+      document.getElementById('treasure').innerHTML = ''
+    })
+  }
+
   updateTurn()
 </script>
 <div id='header'></div>
 <button onclick='draw()'>draw</button>
-<button onclick='updateTurn()'>next turn</button>
+<button onclick='nextTurn()'>next turn</button>
+<button onclick='drawTreasure()'>draw treasure</button>
+<div id='treasure'></div>
 <div id='hand'></div>
