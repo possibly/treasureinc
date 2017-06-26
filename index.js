@@ -2,11 +2,16 @@ var express = require('express')
 var app = express()
 
 var treasureinc = require('./treasureinc')
-var deck = require('deck')
-var mustacheExpress = require('mustache-express');
+var mustacheExpress = require('mustache-express')
 
 app.get('/', function (req, res) {
-  res.render('index', {cards: treasureinc.starterDeck()})
+  res.render('index', {})
+})
+
+app.get('/draw', function (req, res) {
+  // draw the current player's hand.
+  var hand = treasureinc.draw()
+  res.render('card', {cards: hand})
 })
 
 app.get('/card/:cardname', function (req, res) {
