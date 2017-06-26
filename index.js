@@ -14,6 +14,10 @@ app.get('/draw', function (req, res) {
   res.render('card', {cards: hand})
 })
 
+app.get('/turn', function (req, res) {
+  res.render('header', {playerId: treasureinc.getCurrentPlayer()})
+})
+
 app.get('/card/:cardname', function (req, res) {
   var cardDescription = treasureinc.cards.get(req.params['cardname'])
   res.send( cardDescription )

@@ -1,14 +1,30 @@
-<script type="text/javascript">
-  function draw(){
+<script type="text/javascript"> 
+  function request(type, url, success){
     var xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       document.getElementById('hand').innerHTML = this.response
+        success.bind(this)()
       }
     }
-    xhttp.open("GET", "draw", true)
+    xhttp.open(type, url, true)
     xhttp.send()
   }
+
+  function draw(){
+    request('get', 'draw', function(){
+      document.getElementById('hand').innerHTML = this.response
+    })
+  }
+
+  function updateTurn(){
+    request('get', 'turn', function(){
+      document.getElementById('header').innerHTML = this.response
+    })
+  }
+
+  updateTurn()
 </script>
+<div id='header'></div>
 <button onclick='draw()'>draw</button>
+<button onclick='updateTurn()'>next turn</button>
 <div id='hand'></div>

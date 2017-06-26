@@ -60,8 +60,15 @@ function starterDeck(){
 
 exports.draw = function(){
   var currentDeck = this.decks[this.currentPlayer]
-  this.currentPlayer == 1 ? this.currentPlayer = 0 : this.currentPlayer = 1
+  console.log('Drawing for '+this.currentPlayer)
   return currentDeck.draw(this.cardsPerHand)
 }
 
 exports.cards = Cards
+
+exports.getCurrentPlayer = function(){
+  // also set's current player to the next player.
+  var currentPlayer = this.currentPlayer
+  this.currentPlayer == 1 ? this.currentPlayer = 0 : this.currentPlayer = 1
+  return currentPlayer
+}
