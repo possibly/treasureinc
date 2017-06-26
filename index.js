@@ -1,18 +1,19 @@
 var express = require('express')
 var app = express()
 
-var cards = require('./cards/cards.json')
- 
+var treasureinc = require('./treasureinc')
+var deck = require('deck')
+var mustacheExpress = require('mustache-express');
+
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.render('index', {cards: treasureinc.starterDeck()})
 })
 
 app.get('/card/:cardname', function (req, res) {
-  var cardDescription = cards.find(function(card){
-    var format = card.name.replace(/\s+/g, '').toLowerCase();
-    return format == req.params['cardname'] 
-  })
+  var cardDescription = treasureinc.cards.get(req.params['cardname'])
   res.send( cardDescription )
 })
- 
+
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache')
 app.listen(3000)
