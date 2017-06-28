@@ -1,4 +1,4 @@
-<script type="text/javascript"> 
+<script type="text/javascript">
   function request(type, url, success){
     var xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function() {
@@ -22,10 +22,18 @@
     })
   }
 
+  function getEquipment(){
+    request('get', 'getEquipment', function(){
+      document.getElementById('equipment').innerHTML = this.response
+    })
+  }
+
   function nextTurn(){
     request('post', 'turn', function(){
       updateTurn()
+      getEquipment()
       document.getElementById('hand').innerHTML = ''
+
     })
   }
 
@@ -38,12 +46,14 @@
   function takeTreasure(cardName){
     request('post', 'takeTreasure/'+cardName, function(){
       document.getElementById('treasure').innerHTML = ''
+      getEquipment() // player may have received equipment.
     })
   }
 
   updateTurn()
 </script>
 <div id='header'></div>
+<div id='equipment'></div>
 <button onclick='draw()'>draw</button>
 <button onclick='nextTurn()'>next turn</button>
 <button onclick='drawTreasure()'>draw treasure</button>

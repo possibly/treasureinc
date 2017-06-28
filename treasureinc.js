@@ -3,11 +3,18 @@ var shuffle = require('deck').shuffle
 
 var exports = module.exports = {
     currentPlayer: 0,
-    decks: [starterDeck(), starterDeck()],
+    players: [Player(), Player()],
     treasureDeck: treasureDeck(),
-    cards: cards,
     cardsPerHand: 5,
     cardsPerTreasureDraw: 3
+}
+
+function Player(){
+  return {
+    hand: [],
+    deck: starterDeck(),
+    equipment: []
+  }
 }
 
 function Deck(){
@@ -73,7 +80,7 @@ function treasureDeck(){
 }
 
 exports.draw = function(){
-  var currentDeck = this.decks[this.currentPlayer]
+  var currentDeck = this.players[this.currentPlayer].deck
   return currentDeck.draw(this.cardsPerHand)
 }
 
@@ -93,15 +100,24 @@ exports.takeTreasure = function(cardName){
   var deck = this.treasureDeck
   var chosenCard = Cards().get(cardName)
   // remove the chosen card from the treasure deck
-  deck.drawn.splice(deck.drawn.findIndex(function(card){ card.name == chosenCard.name }), 1)
-  // give card to the player
-  this.decks[this.currentPlayer].drawn.push(chosenCard)
-  // shuffle the drawn cards back in with the undrawn cards.
+  deck.drawn.splice(deck.drawn.findIndex(function(card){ return card.name == chosenCard.name }), 1)
+  // shuffle the drawn treasure cards back in with the undrawn treasure cards.
   var copyLen = deck.drawn.length
   for (var i = 0; i < copyLen; i++){
     deck.undrawn.push(deck.drawn.pop())
   }
   // shuffle all the treasure cards.
   deck.undrawn = shuffle(deck.undrawn)
-  return deck
+  // give the treasure card to the player.
+  if (chosenCard.type == 'equipment'){
+    this.players[this.currentPlayer].equipment.push(chosenCard)
+    return 'equipment'
+  } 
+  // move card to the player's drawn pile.
+  this.players[this.currentPlayer].deck.drawn.push(chosenCard)
+  return 'ability'
+}
+
+exports.getEquipment = function(){
+  return this.players[this.currentPlayer].equipment
 }
