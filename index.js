@@ -37,6 +37,10 @@ app.get('/equipment', function (req, res) {
   res.render('equipment', {equipment: treasureinc.getEquipment()})
 })
 
+app.get('/level', function (req, res) {
+  res.render('level', {level: treasureinc.getLevel()})
+})
+
 app.get('/card/:cardname', function (req, res) {
   var cardDescription = treasureinc.cards.get(req.params['cardname'])
   res.send( cardDescription )

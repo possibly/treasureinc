@@ -1,12 +1,45 @@
 var cards = require('./cards/cards.json')
 var shuffle = require('deck').shuffle
+var fs = require('fs')
+var level = parseLevel( fs.readFileSync('./levels/demo.level'),
+    {
+      w: 'wall',
+      e: 'empty'
+    }
+)
+
+function parseLevel(levelData, mapping){
+  var parsed = levelData.toString().split('\n').map(function(line){
+    return line.split('').map(function(character){
+      return {
+        'viz': character,
+        'logic': mapping[character]
+      }
+    })
+  })
+  return {
+    data: parsed,
+    mapping: mapping,
+    get: function(row, col){
+      return this.logic[row][col]
+    },
+    set: function(row, col, obj){
+      var copy = this.logic.slice()
+      var rowcopy = copy[row].slice()
+      rowcopy[col] = obj
+      copy[row] = rowcopy
+      return copy
+    }
+  }
+}
 
 var exports = module.exports = {
     currentPlayer: 0,
     players: [Player(), Player()],
     treasureDeck: treasureDeck(),
     cardsPerHand: 5,
-    cardsPerTreasureDraw: 3
+    cardsPerTreasureDraw: 3,
+    level: level
 }
 
 function Player(){
@@ -120,4 +153,12 @@ exports.takeTreasure = function(cardName){
 
 exports.getEquipment = function(){
   return this.players[this.currentPlayer].equipment
+}
+
+exports.getLevel = function(){
+  return this.level.data.map(function(line){
+    return line.map(function(character){
+      return character.viz
+    })
+  })
 }

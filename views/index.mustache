@@ -50,9 +50,28 @@
     })
   }
 
+  function drawLevel(){
+    request('get', 'level', function(){
+      var format = this.response.replace(/[, ]+/g, '').replace(/\r?\n|\r/g, '').trim().split('<br>').map(function(lines){
+        return lines.split('')
+      })
+      var table = document.createElement('table')
+      for(var i = 0; i < format.length-1; i++){
+        var row = table.insertRow(i)
+        for(var j = 0; j < format[0].length; j++){
+          var cell = row.insertCell(j)
+          cell.innerHTML = format[i][j]
+        }
+      }
+      document.getElementById('level').appendChild(table)
+    })
+  }
+
+  drawLevel()
   updateTurn()
 </script>
 <div id='header'></div>
+<div id='level'></div><br>
 <div id='equipment'></div>
 <button onclick='draw()'>draw</button>
 <button onclick='nextTurn()'>next turn</button>
