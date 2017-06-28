@@ -23,7 +23,7 @@
   }
 
   function getEquipment(){
-    request('get', 'getEquipment', function(){
+    request('get', 'equipment', function(){
       document.getElementById('equipment').innerHTML = this.response
     })
   }

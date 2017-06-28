@@ -33,7 +33,7 @@ app.post('/takeTreasure/:cardname', function (req, res) {
   res.sendStatus(200)
 })
 
-app.get('/getEquipment', function (req, res) {
+app.get('/equipment', function (req, res) {
   res.render('equipment', {equipment: treasureinc.getEquipment()})
 })
 
