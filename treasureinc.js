@@ -4,13 +4,22 @@ var fs = require('fs')
 var level = parseLevel( fs.readFileSync('./levels/demo.level'),
     {
       w: 'wall',
-      e: 'empty'
+      e: 'empty',
+      p: 'player'
     }
 )
 
 function parseLevel(levelData, mapping){
-  var parsed = levelData.toString().split('\n').map(function(line){
-    return line.split('').map(function(character){
+  var playerLocs = []
+  var playerViz = 0
+  var parsed = levelData.toString().split('\n').map(function(line, i){
+    return line.split('').map(function(character, j){
+      if (character == 'p'){
+        playerLocs.push([i,j])
+        character = playerViz
+        mapping[playerViz] = 'player '+playerViz
+        playerViz++
+      }
       return {
         'viz': character,
         'logic': mapping[character]
@@ -20,11 +29,12 @@ function parseLevel(levelData, mapping){
   return {
     data: parsed,
     mapping: mapping,
+    playerLocs: playerLocs,
     get: function(row, col){
-      return this.logic[row][col]
+      return this.data[row][col]
     },
     set: function(row, col, obj){
-      var copy = this.logic.slice()
+      var copy = this.data.slice()
       var rowcopy = copy[row].slice()
       rowcopy[col] = obj
       copy[row] = rowcopy
@@ -35,18 +45,22 @@ function parseLevel(levelData, mapping){
 
 var exports = module.exports = {
     currentPlayer: 0,
-    players: [Player(), Player()],
+    level: level,
+    players:  [
+                Player(level.playerLocs[0], starterDeck()),
+                Player(level.playerLocs[1], starterDeck())
+              ],
     treasureDeck: treasureDeck(),
     cardsPerHand: 5,
-    cardsPerTreasureDraw: 3,
-    level: level
+    cardsPerTreasureDraw: 3
 }
 
-function Player(){
+function Player(startingLoc, deck){
   return {
     hand: [],
-    deck: starterDeck(),
-    equipment: []
+    deck: deck,
+    equipment: [],
+    loc: startingLoc
   }
 }
 
@@ -161,4 +175,17 @@ exports.getLevel = function(){
       return character.viz
     })
   })
+}
+
+exports.movePlayerAvatarTo = function(row, col){
+  var p = this.currentPlayer
+  var l = this.level
+  var collision = l.get(row, col).logic
+  if (collision == 'wall' || collision.indexOf('player') == 0){
+    return false
+  }
+  l.data = l.set(row, col, {'viz': p, 'logic': 'player '+this.currentPlayer})
+  l.data = l.set(this.players[p].loc[0], this.players[p].loc[1], {'viz': 'e', 'logic': 'empty'})
+  this.players[p].loc = [row, col]
+  return true
 }

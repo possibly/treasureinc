@@ -1,0 +1,14 @@
+{{#cards}}
+<div class='card'>
+  {{name}}<br>
+  {{type}}<br>
+  {{description}}<br>
+  {{#combo}}
+    ({{combo}}) {{effect}}<br>
+  {{/combo}}
+  {{#treasure}}
+    <button onclick='takeTreasure("{{name}}")'>take</button>
+  {{/treasure}}
+  <br>
+</div>
+{{/cards}}
