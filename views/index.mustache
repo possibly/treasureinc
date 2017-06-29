@@ -63,6 +63,10 @@
             moveCurrentPlayerAvatarTo(i, j)
           }.bind(null, i, j)
           btn.innerHTML = level[i][j]
+          if (level[i][j] == 'w'){ btn.style.backgroundColor = 'brown' }
+          else if (level[i][j] == 't'){ btn.style.backgroundColor = 'yellow' }
+          else if (level[i][j] == '0'){ btn.style.backgroundColor = 'red' }
+          else if (level[i][j] == '1'){ btn.style.backgroundColor = 'green' }
           cell.appendChild(btn)
         }
       }

@@ -5,7 +5,8 @@ var level = parseLevel( fs.readFileSync('./levels/demo.level'),
     {
       w: 'wall',
       e: 'empty',
-      p: 'player'
+      p: 'player',
+      t: 'treasure'
     }
 )
 
