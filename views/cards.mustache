@@ -1,7 +1,7 @@
 {{#cards}}
-<div class='card'>
+<div class='card' id='{{name}}'>
   {{name}}<br>
-  {{type}}<br>
+  {{type}} {{#channeled}}<button onclick='playChanneled("{{name}}")'>play</button>{{/channeled}} <br>
   {{description}}<br>
   {{#combo}}
     ({{combo}}) {{effect}}<br>

@@ -28,12 +28,32 @@
     })
   }
 
+  function getChanneled(){
+    request('get', 'channel', function(){
+      document.getElementById('channeled').innerHTML = this.response
+    })
+  }
+
+  function removeChanneled(cardName){
+    request('post', 'channel/remove/'+cardName, function(){
+      document.getElementById(cardName).style.display = 'none'
+    })
+  }
+
+  function playChanneled(cardName){
+    console.log('yes')
+    request('post', 'channel/play/'+cardName, function(){
+      document.getElementById(cardName).style.display = 'none'
+      getChanneled()
+    })
+  }
+
   function nextTurn(){
     request('post', 'turn', function(){
       updateTurn()
       getEquipment()
+      getChanneled()
       document.getElementById('hand').innerHTML = ''
-
     })
   }
 
@@ -87,8 +107,9 @@
 <div id='header'></div>
 <div id='level'></div><br>
 <div id='equipment'></div>
+<div id='channeled'></div>
 <button onclick='draw()'>draw</button>
 <button onclick='nextTurn()'>next turn</button>
-<button onclick='drawTreasure()'>draw treasure</button>
+<button onclick='drawTreasure()'>draw treasure</button><br><br>
 <div id='treasure'></div>
 <div id='hand'></div>

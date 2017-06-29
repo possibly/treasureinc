@@ -1,0 +1,11 @@
+{{#cards}}
+  <div class='card' id='{{name}}'>
+    {{name}}<br>
+    {{type}} {{#channeled}}<button onclick='removeChanneled("{{name}}")'>remove</button>{{/channeled}} <br>
+    {{description}}<br>
+    {{#combo}}
+      ({{combo}}) {{effect}}<br>
+    {{/combo}}
+    <br>
+  </div>
+{{/cards}}

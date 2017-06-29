@@ -70,6 +70,7 @@ function Deck(){
     // 0 is top of the deck.
     undrawn: [],
     drawn: [],
+    channeled: [],
     push: function(card){
       return this.undrawn.push(card)
     },
@@ -189,4 +190,30 @@ exports.movePlayerAvatarTo = function(row, col){
   l.data = l.set(this.players[p].loc[0], this.players[p].loc[1], {'viz': 'e', 'logic': 'empty'})
   this.players[p].loc = [row, col]
   return true
+}
+
+exports.playChanneled = function(cardName){
+  cardName = cardName.replace(/\s+/g, '').toLowerCase()
+  var deck = this.players[this.currentPlayer].deck
+  var chosenCard = Cards().get(cardName)
+  // remove the chosen card from the player's drawn pile
+  deck.drawn.splice(deck.drawn.findIndex(function(card){ return card.name == chosenCard.name }), 1)
+  //add the chosen card to the player's channel pile.
+  deck.channeled.push(chosenCard)
+  return true
+}
+
+exports.removeChanneled = function(cardName){
+  var deck = this.players[this.currentPlayer].deck
+  cardName = cardName.replace(/\s+/g, '').toLowerCase()
+  var chosenCard = Cards().get(cardName)
+  // remove the chosen card from the player's channel pile
+  deck.channeled.splice(deck.channeled.findIndex(function(card){ return card.name == chosenCard.name }), 1)
+  //add the chosen card to the player's drawn pile.
+  deck.drawn.push(chosenCard)
+  return true
+}
+
+exports.getChanneled = function(){
+  return this.players[this.currentPlayer].deck.channeled
 }

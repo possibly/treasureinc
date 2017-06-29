@@ -10,7 +10,14 @@ app.get('/', function (req, res) {
 
 app.get('/draw', function (req, res) {
   // draw the current player's hand.
-  res.render('cards', {cards: treasureinc.draw()})
+  var hand = treasureinc.draw()
+  hand = hand.map(function(card) { 
+    if (card.type == 'Chanelled'){ 
+      card.channeled = true 
+    }
+    return card
+  })
+  res.render('cards', {cards: hand})
 })
 
 app.get('/turn', function (req, res) {
@@ -46,6 +53,20 @@ app.get('/level', function (req, res) {
 app.post('/movePlayerAvatarTo/:row/:col', function (req, res) {
   treasureinc.movePlayerAvatarTo(req.params['row'], req.params['col'])
   res.sendStatus(200)
+})
+
+app.post('/channel/play/:cardname', function (req, res) {
+  treasureinc.playChanneled(req.params['cardname'])
+  res.sendStatus(200)
+})
+
+app.post('/channel/remove/:cardname', function (req, res){
+  treasureinc.removeChanneled(req.params['cardname'])
+  res.sendStatus(200)
+})
+
+app.get('/channel', function (req, res) {
+  res.render('channeled', {cards: treasureinc.getChanneled()})
 })
 
 app.get('/card/:cardname', function (req, res) {
