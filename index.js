@@ -76,4 +76,4 @@ app.get('/card/:cardname', function (req, res) {
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache')
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
