@@ -6,7 +6,7 @@
     },
     {
         "name": "Ghost Noises",
-        "description": "Scare: 2, Distance: 6",
+        "description": "Scare: 2, Distance: 3",
         "type": "ability"
     },
     {
@@ -16,7 +16,7 @@
     },
     {
         "name": "Firecracker",
-        "description": "Scare: 1, Distance: 6",
+        "description": "Scare: 1, Distance: 3",
         "type": "equipment"
     },
     {
@@ -26,26 +26,26 @@
     },
     {
         "name": "Nightmare",
-        "description": "1 scare per turn for 2 turns. Distance: 6",
+        "description": "2 scare this turn and next. Distance: 6",
         "type": "ability",
         "combo": "Witchdoctor"
     },
     {
         "name": "Frighten",
-        "description": "Target may not move next turn. Distance: 3.",
+        "description": "Target loses two moves next turn. Distance: 3.",
         "type": "ability",
         "combo": "Witchdoctor",
-        "effect": "Target loses 2 moves in 2 turns"
+        "effect": "No scares frighten you next turn."
     },
     {
         "name": "Poison Dart",
-        "description": "1 Scare, -1 movement next turn. Distance: 6",
+        "description": "2 Scare, -1 movement next turn. Distance: 6",
         "type": "ability",
         "combo": "Witchdoctor"
     },
     {
-        "name": "Hidden Door",
-        "description": "All targets may not Scare you next turn.",
+        "name": "Hidden Doors",
+        "description": "Walk through walls this turn.",
         "type": "ability",
         "combo": "Pathfinder"
     },
@@ -57,14 +57,14 @@
     },
     {
         "name": "Sprint",
-        "description": "3+ movement. Player is unable to attack this turn.",
+        "description": "2+ movement.",
         "type": "ability",
         "combo": "Pathfinder",
         "effect": "Running within 1 tile of target causes 1 scare"
     },
     {
         "name": "Mirror Image",
-        "description": "Duplicate your character for 2 turns. Duplicate can be scared. At the \nend of the 2nd turn, player can move to either location.",
+        "description": "Duplicate your character for 2 turns. Duplicate can be scared, \nmay open treasures, and may deliver scares. At the \nend of the 2nd turn, player can move to either location.",
         "type": "Chanelled",
         "combo": "Magician"
     },
@@ -73,11 +73,11 @@
         "description": "Leave at your location. Ward can not be scared. Ward is returned to deck\nafter 3 turns. Scare: 1, Distance: 4",
         "type": "Chanelled",
         "combo": "Magician",
-        "effect": "May scare through walls."
+        "effect": "May scare through walls this turn."
     },
     {
-        "name": "Deadbolt",
-        "description": "Prevent target from opening a chest next turn. Distance: 10, through walls.",
+        "name": "Booby Trap",
+        "description": "Target treasure explodes, becoming unopenable for 1 round. \nScare: 3, distance: 7, through walls",
         "type": "ability",
         "combo": "Magician"
     }
