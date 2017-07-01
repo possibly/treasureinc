@@ -53,6 +53,7 @@
       updateTurn()
       getEquipment()
       getChanneled()
+      updateCourageDisplay()
       document.getElementById('hand').innerHTML = ''
     })
   }
@@ -101,10 +102,37 @@
     })
   }
 
+  function deltaCourage(playerCourageElementId, delta){
+    var el = document.getElementById(playerCourageElementId)
+    el.innerHTML = parseInt(el.innerHTML)+parseInt(delta)
+    return true
+  }
+
+  function updateCourageDisplay(){
+    var courages = document.getElementById('courage').children
+    for(var i = 0; i < courages.length; i++){
+      courages[i].style.visibility == 'hidden' ? courages[i].style.visibility = 'visible' : courages[i].style.visibility = 'hidden'
+    }
+    return true
+  }
+
   drawLevel()
   updateTurn()
 </script>
 <div id='header'></div>
+<div id='courage'>
+  <div style='display: inline-block'>
+    <p id='courageZero'>20</p>
+    <button onclick='deltaCourage("courageZero", 1)'>+</button>
+    <button onclick='deltaCourage("courageZero", -1)'>-</button>
+  </div>
+  <div style='display: inline-block; visibility: hidden'>
+    <p id='courageOne'>20</p>
+    <button onclick='deltaCourage("courageOne", 1)'>+</button>
+    <button onclick='deltaCourage("courageOne", -1)'>-</button>
+  </div>
+  <br><br>
+</div>
 <div id='level'></div><br>
 <div id='equipment'></div>
 <div id='channeled'></div>
