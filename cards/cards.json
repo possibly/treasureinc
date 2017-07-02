@@ -6,7 +6,7 @@
     },
     {
         "name": "Ghost Noises",
-        "description": "Scare: 2, Distance: 3",
+        "description": "Scare: 2, Distance: 5",
         "type": "ability"
     },
     {
@@ -16,19 +16,20 @@
     },
     {
         "name": "Firecracker",
-        "description": "Scare: 1, Distance: 3",
+        "description": "Scare: 1, Distance: 5",
         "type": "equipment"
     },
     {
         "name": "Etheral Gloves",
-        "description": "All close scares +1. Scare: 4, Distance: 1",
+        "description": "Scare: 4, Distance: 1",
         "type": "equipment"
     },
     {
         "name": "Nightmare",
         "description": "2 scare this turn and next. Distance: 6",
         "type": "ability",
-        "combo": "Witchdoctor"
+        "combo": "Witchdoctor",
+        "effect": "Regenerate 2 courage"
     },
     {
         "name": "Frighten",
@@ -39,34 +40,38 @@
     },
     {
         "name": "Poison Dart",
-        "description": "2 Scare, -1 movement next turn. Distance: 6",
+        "description": "2 Scare, -1 movement for target next turn. Distance: 6",
         "type": "ability",
-        "combo": "Witchdoctor"
+        "combo": "Witchdoctor",
+        "effect": "If poision dart hits, gain +2 movement"
     },
     {
         "name": "Hidden Doors",
         "description": "Walk through walls this turn.",
         "type": "ability",
-        "combo": "Pathfinder"
+        "combo": "Pathfinder",
+        "effect": "Walking through a wall does not cost a movement"
     },
     {
         "name": "Boo!",
-        "description": "Scare: 4, Distance: 1. Must be behind target.",
+        "description": "Scare: 4, Distance: 1.",
         "type": "ability",
-        "combo": "Pathfinder"
+        "combo": "Pathfinder",
+        "effect": "1+ movement"
     },
     {
         "name": "Sprint",
         "description": "2+ movement.",
         "type": "ability",
         "combo": "Pathfinder",
-        "effect": "Running within 1 tile of target causes 1 scare"
+        "effect": "Running within 1 tile of target causes 1 scare for every tile."
     },
     {
         "name": "Mirror Image",
         "description": "Duplicate your character for 2 turns. Duplicate can be scared, \nmay open treasures, and may deliver scares. At the \nend of the 2nd turn, player can move to either location.",
         "type": "Chanelled",
-        "combo": "Magician"
+        "combo": "Magician",
+        "effect": "Your mirror image may not be scared next turn"
     },
     {
         "name": "Ward",
@@ -77,8 +82,9 @@
     },
     {
         "name": "Booby Trap",
-        "description": "Target treasure explodes, becoming unopenable for 1 round. \nScare: 3, distance: 7, through walls",
+        "description": "Target treasure explodes, becoming unopenable next turn\nScare: 3, distance: 7, through walls",
         "type": "ability",
-        "combo": "Magician"
+        "combo": "Magician",
+        "effect": "You may open the trapped treasure"
     }
 ]
