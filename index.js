@@ -1,6 +1,5 @@
 var express = require('express')
 var app = express()
-
 var treasureinc = require('./treasureinc')
 var mustacheExpress = require('mustache-express')
 

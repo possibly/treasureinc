@@ -7,11 +7,12 @@
     "deck": "0.0.4",
     "express": "^4.15.3",
     "mustache": "^2.3.0",
-    "mustache-express": "^1.2.4"
+    "mustache-express": "^1.2.4",
+    "shallow-copy": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js && echo \"Navigate to localhost:3000\""
+    "start": "node index.js"
   },
   "author": "Tyler Brothers <tylerbrothers1@gmail.com> (www.thetylerbrothers.com)",
   "license": "ISC"
