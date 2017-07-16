@@ -8,7 +8,8 @@
     "express": "^4.15.3",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.4",
-    "shallow-copy": "0.0.1"
+    "shallow-copy": "0.0.1",
+    "tape": "^4.7.0"
   },
   "devDependencies": {},
   "scripts": {

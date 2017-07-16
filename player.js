@@ -5,18 +5,18 @@ var copy = require('shallow-copy');
 var Player = {
   name: '',
   resolve: 20,
-  played: [],
-  hand: [],
+  played: ImmutableDeck([]),
+  hand: ImmutableDeck([]),
   undrawn: ImmutableDeck(Cards.StarterDeck()).shuffle(),
-  discard: [],
-  equipment: [],
-  channeling: [],
+  discarded: ImmutableDeck([]),
+  equipment: ImmutableDeck([]),
+  channeling: ImmutableDeck([]),
   loc: []
 }
 
 exports = module.exports = function(){
   return Object.keys(exports).reduce(function(acc, key){
-    acc[key] = exports[key]
+    acc[key] = exports[key];
     return acc;
   }, copy(Player))
 }
@@ -44,26 +44,26 @@ exports.trash = function(cardToTrash, fromDeck){
 // not go in the back of the undrawn pile.
 exports.shuffle = function(){
   var p = copy(this);
-  p.undrawn = this.undrawn.concat(this.discard);
+  p.undrawn = this.undrawn.concat(this.discarded);
   p.undrawn = p.undrawn.shuffle();
   return p;
 }
 
 exports.draw = function(numToDraw){
   var res = this.undrawn.draw(
-              this.discard, 
+              this.discarded, 
               numToDraw
             );
   var p = copy(this);
   p.hand = res.drawn;
   p.undrawn = res.remaining;
-  if (res.shuffled){ p.discard = [] }
+  if (res.shuffled){ p.discarded = [] }
   return p;
 }
 
 exports.play = function(cardToPlay){
   var p = copy(this);
-  p.hand = this.hand.without(cardToPlay, Cards.compareCards);
+  p.hand = this.hand.without([cardToPlay], Cards.compareCards);
   if (cardToPlay.chanelled){
     p.channeling = p.channeling.concat({
       details: cardToPlay,
@@ -77,8 +77,8 @@ exports.play = function(cardToPlay){
 
 exports.discard = function(cardToDiscard, fromDeck){
   var p = copy(this);
-  p[fromDeck] = this[fromDeck].without(cardToDiscard, Cards.compareCards);
-  p.discard = this.discard.concat(cardToDiscard);
+  p[fromDeck] = this[fromDeck].without([cardToDiscard], Cards.compareCards);
+  p.discarded = this.discarded.concat(cardToDiscard);
   return p;
 }
 
@@ -92,12 +92,10 @@ exports.endTurn = function(){
     })
     p.channeling = p.channeling.filter(function(channeledCard){
       if (channeledCard.duration != 0){ return true; }
-      p.discard = p.discard.concat(channeledCard.details);
+      p.discarded = p.discarded.concat(channeledCard.details);
     })
   }
-  p.discard = p.discard
-              .concat(this.hand)
-              .concat(this.played);
+  p.discarded = p.discarded.concat(this.hand).concat(this.played);
   p.hand = [];
   p.played = [];
   return p
@@ -109,7 +107,7 @@ exports.gain = function(cardToGain){
     p.equipment = p.equipment.concat(cardToGain);
     return p
   }
-  p.discard = p.discard.concat(cardToGain);
+  p.discarded = p.discarded.concat(cardToGain);
   return p;
 }
 
